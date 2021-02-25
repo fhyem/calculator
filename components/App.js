@@ -8,31 +8,18 @@ function App() {
   const [operator, setOperator] = useState("");
 
   const numInput = (e) => {
-    // if (result === 0 || operator !== "") {
-    //   let firstNum = e.target.value;
-    //   return setResult(firstNum);
-    // } else {
-    //   if (operator === "") {
-    //     let firstNum = result + e.target.value;
-    //     return setResult(firstNum);
-    //   } else {
-    //     const valueOne = result;
-    //     setFirstValue(valueOne);
-    //     setResult(0);
-    //     const valueTwo = e.target.value;
-    //     setSecondValue(valueTwo);
-    //     setFirstValue(result);
-    //     setSecondValue(e.target.value);
-    //     setResult(e.target.value);
-    //     console.log(firstValue);
-    //     console.log(e.target.value);
-    //     console.log(secondValue);
-    //   }
-    // }
-  };
-
-  const operandInput = (operator) => {
-    setOperator(operator.target.value);
+    if (firstValue === 0 || result !== 0) {
+      setFirstValue(e.target.name);
+      setResult(0);
+      setOperator("");
+      setSecondValue(0);
+    } else if (firstValue !== 0 && operator === "") {
+      setFirstValue(firstValue + e.target.name);
+    } else if (operator !== "") {
+      secondValue
+        ? setSecondValue(secondValue + e.target.name)
+        : setSecondValue(e.target.name);
+    }
   };
 
   const clearResult = () => {
@@ -44,30 +31,24 @@ function App() {
     });
   };
 
-  const calculate = () => {
-    switch (operator) {
-      case "+":
-        setResult(firstValue + secondValue);
-        console.log("Plus clicked");
-        break;
-      case "-":
-        setResult(firstValue - secondValue);
-        break;
-      case "X":
-        setResult(firstValue * secondValue);
-        break;
-      case "/":
-        setResult(firstValue / secondValue);
-        break;
-    }
-  };
-
   const showResult = () => {
-    if (secondValue !== "") {
-      setResult(calculate());
-    } else {
-      setResult("Put second value");
-    }
+    console.log(firstValue, secondValue, operator);
+    let firstNum = firstValue;
+    let secondNum = secondValue;
+    let operand = operator;
+
+    setResult(() => {
+      switch (operand) {
+        case "+":
+          return Number(firstNum) + Number(secondNum);
+        case "-":
+          return Number(firstNum) - Number(secondNum);
+        case "x":
+          return Number(firstNum) * Number(secondNum);
+        case "/":
+          return Number(firstNum) / Number(secondNum);
+      }
+    });
   };
 
   return (
@@ -75,136 +56,138 @@ function App() {
       <h1>Calculator React</h1>
       <div className="container">
         <div className="header">Calculator</div>
-        <input type="text" className="result" value={result} />
+        <h2 className="result">{result}</h2>
+        <h2 className="result">{firstValue} First-Value</h2>
+        <h2 className="result">{operator} Operator</h2>
+        <h2 className="result">{secondValue} Second-Value</h2>
         <div className="second-row">
-          <input
+          <button
             type="button"
-            name=""
-            value="7"
             className="global seven"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="7"
+            onClick={(e) => numInput(e)}>
+            7
+          </button>
+          <button
             type="button"
-            name=""
-            value="8"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="8"
+            onClick={(e) => numInput(e)}>
+            8
+          </button>
+          <button
             type="button"
-            name=""
-            value="9"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="9"
+            onClick={(e) => numInput(e)}>
+            9
+          </button>
+          <button
             type="button"
-            name=""
-            value="/"
             className="global divide"
-            onClick={(operator) => operandInput(operator)}
-          />
+            name="/"
+            onClick={() => setOperator("/")}>
+            /
+          </button>
         </div>
         <div className="third-row">
-          <input
+          <button
             type="button"
-            name=""
-            value="4"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="4"
+            onClick={(e) => numInput(e)}>
+            4
+          </button>
+          <button
             type="button"
-            name=""
-            value="5"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="5"
+            onClick={(e) => numInput(e)}>
+            5
+          </button>
+          <button
             type="button"
-            name=""
-            value="6"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="6"
+            onClick={(e) => numInput(e)}>
+            6
+          </button>
+          <button
             type="button"
-            name=""
-            value="X"
             className="global multiply"
-            onClick={(operator) => operandInput(operator)}
-          />
+            name="x"
+            onClick={() => setOperator("x")}>
+            x
+          </button>
         </div>
         <div className="fourth-row">
-          <input
+          <button
             type="button"
-            name=""
-            value="1"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="1"
+            onClick={(e) => numInput(e)}>
+            1
+          </button>
+          <button
             type="button"
-            name=""
-            value="2"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="2"
+            onClick={(e) => numInput(e)}>
+            2
+          </button>
+          <button
             type="button"
-            name=""
-            value="3"
             className="global"
-            onClick={(e) => numInput(e)}
-          />
-          <input
+            name="3"
+            onClick={(e) => numInput(e)}>
+            3
+          </button>
+          <button
             type="button"
-            name=""
-            value="-"
             className="global minus"
-            onClick={(operator) => operandInput(operator)}
-          />
+            name="-"
+            onClick={() => setOperator("-")}>
+            -
+          </button>
         </div>
         <div className="conflict">
           <div className="left">
-            <input
+            <button
               type="button"
-              name=""
-              value="0"
               className="global big zero"
-              onClick={(e) => numInput(e)}
-            />
-            <input
+              name="0"
+              onClick={(e) => numInput(e)}>
+              0
+            </button>
+            <button
               type="button"
-              name=""
-              value="."
               className="global small dot"
-              onClick={(e) => numInput(e)}
-            />
-            <input
+              name="."
+              onClick={(e) => numInput(e)}>
+              .
+            </button>
+            <button
               type="button"
-              name=""
-              value="Del"
               className="red small white-text top-margin delete"
-              onClick={() => clearResult()}
-            />
-            <input
+              name="Del"
+              onClick={() => clearResult()}>
+              Del
+            </button>
+
+            <button
               type="button"
-              name=""
-              value="="
               className="green white-text big top-margin equal"
-              onClick={() => showResult()}
-            />
+              onClick={() => showResult()}>
+              =
+            </button>
           </div>
           <div className="right">
-            <input
+            <button
               type="button"
-              name=""
-              value="+"
               className="global grey plus"
-              onClick={(operator) => operandInput(operator)}
-            />
+              onClick={() => setOperator("+")}>
+              +
+            </button>
           </div>
         </div>
       </div>
@@ -213,196 +196,3 @@ function App() {
 }
 
 export default App;
-
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-
-//     // this.state = {
-//     //   firstValue: 0,
-//     //   secondValue: 0,
-//     //   result: 0,
-//     //   operator: "",
-//     // };
-//   }
-
-//   numInput(e) {
-//     if (result === 0) {
-//       setResult(e.target.value);
-//     } else {
-//       if (operator === "") {
-//         setResult(result + e.target.value);
-//       } else {
-//         setFirstValue(result);
-//       }
-//       console.log(this.state.result);
-//       console.log(this.state.firstValue);
-//     }
-//   }
-
-//   operandInput(value) {
-//     this.setState({
-//       operator: value.target.value,
-//     });
-//   }
-
-//   clearResult() {
-//     this.setState({
-//       firstValue: 0,
-//       secondValue: 0,
-//       result: 0,
-//       operator: "",
-//     });
-//   }
-
-//   showResult() {
-//     if (this.state.secondValue !== "") {
-//       const result = `${this.state.firstValue}${this.state.operator}${this.state.secondValue}`;
-//     }
-//   }
-
-//   render() {
-//     return (
-//       <div className="App">
-//         <h1>Calculator React</h1>
-//         <div className="container">
-//           <div className="header">Calculator</div>
-//           <input type="text" className="result" value={this.state.result} />
-//           <div className="second-row">
-//             <input
-//               type="button"
-//               name=""
-//               value="7"
-//               className="global seven"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="8"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="9"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="/"
-//               className="global divide"
-//               onClick={(operator) => this.operandInput(operator)}
-//             />
-//           </div>
-//           <div className="third-row">
-//             <input
-//               type="button"
-//               name=""
-//               value="4"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="5"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="6"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="X"
-//               className="global multiply"
-//               onClick={(operator) => this.operandInput(operator)}
-//             />
-//           </div>
-//           <div className="fourth-row">
-//             <input
-//               type="button"
-//               name=""
-//               value="1"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="2"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="3"
-//               className="global"
-//               onClick={(e) => this.numInput(e)}
-//             />
-//             <input
-//               type="button"
-//               name=""
-//               value="-"
-//               className="global minus"
-//               onClick={(operator) => this.operandInput(operator)}
-//             />
-//           </div>
-//           <div className="conflict">
-//             <div className="left">
-//               <input
-//                 type="button"
-//                 name=""
-//                 value="0"
-//                 className="global big zero"
-//                 onClick={(e) => this.numInput(e)}
-//               />
-//               <input
-//                 type="button"
-//                 name=""
-//                 value="."
-//                 className="global small dot"
-//                 onClick={(e) => this.numInput(e)}
-//               />
-//               <input
-//                 type="button"
-//                 name=""
-//                 value="Del"
-//                 className="red small white-text top-margin delete"
-//                 onClick={() => this.clearResult()}
-//               />
-//               <input
-//                 type="button"
-//                 name=""
-//                 value="="
-//                 className="green white-text big top-margin equal"
-//                 onClick={() => this.showResult()}
-//               />
-//             </div>
-//             <div className="right">
-//               <input
-//                 type="button"
-//                 name=""
-//                 value="+"
-//                 className="global grey plus"
-//                 onClick={(operator) => this.operandInput(operator)}
-//               />
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
