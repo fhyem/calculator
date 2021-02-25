@@ -4,8 +4,8 @@
   "description": "Calculator app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development --open --hot",
-    "build": "webpack --mode production"
+    "start": "webpack serve --mode development --open --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --mode production"
   },
   "keywords": [],
   "author": "Fhyem",
