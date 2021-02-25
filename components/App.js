@@ -8,10 +8,12 @@ function App() {
   const [operator, setOperator] = useState("");
 
   const inputDot = () => {
-    if (firstValue.indexOf(".") === -1 && operator === "") {
+    if (firstValue && firstValue.indexOf(".") === -1 && operator === "") {
       setFirstValue(firstValue + ".");
-    } else if (secondValue.indexOf(".") === -1) {
+    } else if (secondValue && secondValue.indexOf(".") === -1) {
       setSecondValue(secondValue + ".");
+    } else {
+      return null;
     }
   };
 
@@ -31,16 +33,13 @@ function App() {
   };
 
   const clearResult = () => {
-    this.setState({
-      firstValue: 0,
-      secondValue: 0,
-      result: 0,
-      operator: "",
-    });
+    setFirstValue(0);
+    setSecondValue(0);
+    setOperator("");
+    setResult(0);
   };
 
   const showResult = () => {
-    console.log(firstValue, secondValue, operator);
     let firstNum = firstValue;
     let secondNum = secondValue;
     let operand = operator;
@@ -173,7 +172,7 @@ function App() {
               type="button"
               className="global small dot"
               name="."
-              onClick={() => inputDot()}>
+              onClick={inputDot}>
               .
             </button>
             <button
