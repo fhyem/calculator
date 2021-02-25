@@ -10,13 +10,14 @@ h1 {
 .container {
   margin: auto;
   width: 80%;
+  height: 100%;
   padding: 10px;
   border: 1px solid #f2f2f2;
   -webkit-box-shadow: 1px 1px 4px 0px rgba(176, 176, 176, 1);
   -moz-box-shadow: 1px 1px 4px 0px rgba(176, 176, 176, 1);
   box-shadow: 1px 1px 4px 0px rgba(176, 176, 176, 1);
   background-color: #fff;
-  height: 400px;
+  /* height: 400px; */
   background-color: #f8f8f8;
 }
 .header {
@@ -41,6 +42,7 @@ h1 {
 .conflict {
   display: inline-block;
   width: 100%;
+  position: inherit;
 }
 .global {
   padding: 15px;
@@ -105,4 +107,13 @@ h1 {
 }
 .top-margin {
   margin-top: 4px;
+}
+.zero {
+  width: 67%;
+}
+.dot {
+  width: 3fr;
+}
+.equal {
+  width: 67%;
 }

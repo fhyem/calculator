@@ -7,6 +7,14 @@ function App() {
   const [result, setResult] = useState(0);
   const [operator, setOperator] = useState("");
 
+  const inputDot = () => {
+    if (firstValue.indexOf(".") === -1 && operator === "") {
+      setFirstValue(firstValue + ".");
+    } else if (secondValue.indexOf(".") === -1) {
+      setSecondValue(secondValue + ".");
+    }
+  };
+
   const numInput = (e) => {
     if (firstValue === 0 || result !== 0) {
       setFirstValue(e.target.name);
@@ -57,9 +65,11 @@ function App() {
       <div className="container">
         <div className="header">Calculator</div>
         <h2 className="result">{result}</h2>
-        <h2 className="result">{firstValue} First-Value</h2>
+        <h2 className="result">{firstValue ? firstValue : null} First-Value</h2>
         <h2 className="result">{operator} Operator</h2>
-        <h2 className="result">{secondValue} Second-Value</h2>
+        <h2 className="result">
+          {secondValue ? secondValue : null} Second-Value
+        </h2>
         <div className="second-row">
           <button
             type="button"
@@ -163,7 +173,7 @@ function App() {
               type="button"
               className="global small dot"
               name="."
-              onClick={(e) => numInput(e)}>
+              onClick={() => inputDot()}>
               .
             </button>
             <button
